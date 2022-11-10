@@ -1,6 +1,6 @@
 package br.com.zup.kafka.exemplo1.producer;
 
-import br.com.zup.kafka.exemplo1.repositories.IKafkaProducer;
+import br.com.zup.kafka.exemplo1.repositories.IKafkaProducerExemplo1;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.Random;
 
 @Component
-public class Exemplo1Producer implements IKafkaProducer {
+public class Exemplo1Producer implements IKafkaProducerExemplo1 {
 
     @Value("${kafka.exemplo1.topic}")
     private String topic;

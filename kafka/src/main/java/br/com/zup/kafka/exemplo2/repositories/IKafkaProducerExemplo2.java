@@ -1,11 +1,11 @@
-package br.com.zup.kafka.exemplo1.repositories;
+package br.com.zup.kafka.exemplo2.repositories;
 
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
 
 @Service
-public interface IKafkaProducer {
+public interface IKafkaProducerExemplo2 {
 
     void send(Map<String, Object> data);
 

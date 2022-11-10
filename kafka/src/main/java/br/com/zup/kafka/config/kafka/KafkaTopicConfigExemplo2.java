@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.config.TopicBuilder;
 
 @Configuration
-public class KafkaTopicConfig {
+public class KafkaTopicConfigExemplo2 {
 
     private String topic;
 
@@ -16,20 +16,20 @@ public class KafkaTopicConfig {
 
     private String replicas;
 
-    @Value("${kafka.exemplo1.retention.minutes}")
+    @Value("${kafka.exemplo2.retention.minutes}")
     private String retentionInMinutes;
 
 
-    public KafkaTopicConfig(@Value("${kafka.exemplo1.topic}") String topic,
-                            @Value("${kafka.exemplo1.partitions}") String partitions,
-                            @Value("${kafka.exemplo1.replicas}") String replicas) {
+    public KafkaTopicConfigExemplo2(@Value("${kafka.exemplo2.topic}") String topic,
+                                    @Value("${kafka.exemplo2.partitions}") String partitions,
+                                    @Value("${kafka.exemplo2.replicas}") String replicas) {
         this.topic = topic;
         this.partitions = partitions;
         this.replicas = replicas;
     }
 
     @Bean
-    public NewTopic createTopic() {
+    public NewTopic createTopicExample2() {
         return TopicBuilder.name(topic)
                 .partitions(Integer.parseInt(partitions))
                 .replicas(Integer.parseInt(replicas))
