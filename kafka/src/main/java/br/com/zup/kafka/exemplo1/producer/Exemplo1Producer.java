@@ -1,5 +1,6 @@
 package br.com.zup.kafka.exemplo1.producer;
 
+import br.com.zup.kafka.exemplo1.repositories.IKafkaProducer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
@@ -8,7 +9,7 @@ import java.util.Map;
 import java.util.Random;
 
 @Component
-public class Exemplo1Producer {
+public class Exemplo1Producer implements IKafkaProducer {
 
     @Value("${kafka.exemplo1.topic}")
     private String topic;
@@ -23,26 +24,24 @@ public class Exemplo1Producer {
     }
 
     public void send(Map<String, Object> data) {
-        //TODO Criar uma interface com o contrato
 
         String dados = data.toString();
 
-        String divided = divideByPartitions();
+        String selectedPartition = topic + "-" + divideByPartitions();
 
-        kafkaTemplate.send(topic, divided, dados).addCallback(
-                success -> System.out.format(("Topic::%s - Partition::%s\n Message: %s\n"), topic, partitions, dados),
+        kafkaTemplate.send(topic, selectedPartition, dados).addCallback(
+                success -> System.out.format(("Topic:: %s - PartitionKey:: %s\n Message:: %s\n"), topic, selectedPartition, dados),
                 failure -> System.out.println("")
         );
 
     }
 
     private String divideByPartitions() {
-        //TODO revisar a logica
 
         Short shortPartitions = Short.parseShort(this.partitions);
         Random random = new Random();
 
-        Integer divideByPartitions = random.nextInt(100) / shortPartitions;
+        Integer divideByPartitions = random.nextInt(100) % shortPartitions;
 
         return String.valueOf(divideByPartitions);
     }

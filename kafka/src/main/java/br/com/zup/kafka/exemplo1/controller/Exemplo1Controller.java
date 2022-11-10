@@ -1,6 +1,7 @@
 package br.com.zup.kafka.exemplo1.controller;
 
 import br.com.zup.kafka.exemplo1.producer.Exemplo1Producer;
+import br.com.zup.kafka.exemplo1.repositories.IKafkaProducer;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -9,9 +10,9 @@ import java.util.Map;
 @RequestMapping("api/exemplo1")
 public class Exemplo1Controller {
 
-    private Exemplo1Producer producer;
+    private IKafkaProducer producer;
 
-    public Exemplo1Controller(Exemplo1Producer producer) {
+    public Exemplo1Controller(IKafkaProducer producer) {
         this.producer = producer;
     }
 
